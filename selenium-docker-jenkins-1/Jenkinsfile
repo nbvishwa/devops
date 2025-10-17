@@ -47,8 +47,24 @@ pipeline {
       post {
         always {
           junit allowEmptyResults: true, testResults: 'selenium-docker-jenkins-1/target/surefire-reports/junitreports/*.xml'
-          publishHTML(target: [allowMissing: true, alwaysLinkToLastBuild: true, keepAll: true, reportDir: 'selenium-docker-jenkins-1/target/surefire-reports', reportFiles: 'emailable-report.html', reportName: 'TestNG Report'])
           archiveArtifacts artifacts: 'selenium-docker-jenkins-1/target/surefire-reports/**/*', allowEmptyArchive: true
+          
+          // Try to publish HTML report (requires HTML Publisher plugin)
+          script {
+            try {
+              publishHTML([
+                allowMissing: true,
+                alwaysLinkToLastBuild: true,
+                keepAll: true,
+                reportDir: 'selenium-docker-jenkins-1/target/surefire-reports',
+                reportFiles: 'emailable-report.html',
+                reportName: 'TestNG Report'
+              ])
+            } catch (Exception e) {
+              echo "HTML Publisher plugin not available: ${e.getMessage()}"
+              echo "Install 'HTML Publisher Plugin' to see HTML reports in Jenkins UI"
+            }
+          }
         }
       }
     }
