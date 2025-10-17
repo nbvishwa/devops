@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="3" passed="3" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2025-10-16T16:58:02 UTC" name="AmazonGridSuite" finished-at="2025-10-16T16:58:25 UTC" duration-ms="22930">
+    <groups>
+    </groups>
+    <test started-at="2025-10-16T16:58:02 UTC" name="AmazonGridTest" finished-at="2025-10-16T16:58:25 UTC" duration-ms="22930">
+      <class name="com.example.tests.AmazonGridTest">
+        <test-method signature="openAmazonAndPrintTitle(java.lang.String)[pri:0, instance:com.example.tests.AmazonGridTest@124c278f]" started-at="2025-10-16T16:58:02 UTC" name="openAmazonAndPrintTitle" data-provider="browsers" finished-at="2025-10-16T16:58:10 UTC" duration-ms="7331" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[chrome]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- openAmazonAndPrintTitle -->
+        <test-method signature="openAmazonAndPrintTitle(java.lang.String)[pri:0, instance:com.example.tests.AmazonGridTest@124c278f]" started-at="2025-10-16T16:58:10 UTC" name="openAmazonAndPrintTitle" data-provider="browsers" finished-at="2025-10-16T16:58:18 UTC" duration-ms="8148" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[firefox]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- openAmazonAndPrintTitle -->
+        <test-method signature="openAmazonAndPrintTitle(java.lang.String)[pri:0, instance:com.example.tests.AmazonGridTest@124c278f]" started-at="2025-10-16T16:58:18 UTC" name="openAmazonAndPrintTitle" data-provider="browsers" finished-at="2025-10-16T16:58:25 UTC" duration-ms="7433" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[edge]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- openAmazonAndPrintTitle -->
+      </class> <!-- com.example.tests.AmazonGridTest -->
+    </test> <!-- AmazonGridTest -->
+  </suite> <!-- AmazonGridSuite -->
+</testng-results>

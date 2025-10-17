@@ -1,0 +1,52 @@
+pipeline {
+  agent any
+
+  environment {
+    DOCKER_COMPOSE_FILE = 'docker-compose.yml'
+  }
+
+  options {
+    skipDefaultCheckout()
+    timestamps()
+  }
+
+  stages {
+
+    stage('Build test-runner image') {
+      steps {
+        sh 'docker build -t selenium-docker-jenkins:test-runner /workspace'
+      }
+    }
+
+    stage('Start Selenium Grid') {
+      steps {
+        sh 'docker compose -f /workspace/${DOCKER_COMPOSE_FILE} up -d selenium-hub chrome firefox edge'
+        // wait for hub to be ready
+        sh 'echo "Waiting for Selenium Hub..." && sleep 8'
+      }
+    }
+
+    stage('Run Tests') {
+      steps {
+        // Run tests inside ephemeral container with network access to hub and nodes
+        sh 'docker run --rm --network $(docker network ls --filter name=selenium-docker-jenkins_default --format {{.Name}}) -e GRID_URL=http://selenium-hub:4444 -v /workspace:/app -w /app selenium-docker-jenkins:test-runner mvn -B test'
+      }
+      post {
+        always {
+          junit allowEmptyResults: true, testResults: 'target/surefire-reports/junitreports/*.xml'
+          publishHTML(target: [allowMissing: true, alwaysLinkToLastBuild: true, keepAll: true, reportDir: 'target/surefire-reports', reportFiles: 'emailable-report.html', reportName: 'TestNG Report'])
+          archiveArtifacts artifacts: 'target/surefire-reports/**/*', allowEmptyArchive: true
+        }
+      }
+    }
+  }
+
+//   post {
+//     always {
+//       // Stop and remove grid services
+//       sh 'docker compose -f ${DOCKER_COMPOSE_FILE} down -v'
+//     }
+//   }
+}
+
+

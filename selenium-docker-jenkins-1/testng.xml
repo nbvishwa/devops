@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AmazonGridSuite" verbose="1" parallel="false">
+  <test name="AmazonGridTest">
+    <classes>
+      <class name="com.example.tests.AmazonGridTest"/>
+    </classes>
+  </test>
+</suite>
