@@ -41,11 +41,11 @@ pipeline {
       steps {
         dir('selenium-docker-jenkins-1') {
           // Run tests inside ephemeral container with network access to hub and nodes
-          // Use /workspace path since Jenkins container has the project mounted there
+          // Use host path directly since Docker can't access Jenkins container paths
           sh '''
             docker run --rm --network selenium-docker-jenkins-1_default \
               -e GRID_URL=http://selenium-hub:4444 \
-              -v /workspace/selenium-docker-jenkins-1:/app \
+              -v /Users/vishwavijet/Documents/Workspace/devops/selenium-docker-jenkins-1:/app \
               -w /app \
               selenium-docker-jenkins:test-runner \
               sh -c "
