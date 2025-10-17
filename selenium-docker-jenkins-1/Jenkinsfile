@@ -48,7 +48,21 @@ pipeline {
           sh 'ls -la pom.xml || echo "pom.xml not found"'
           
           // Run tests inside ephemeral container with network access to hub and nodes
-          sh 'docker run --rm --network selenium-docker-jenkins-1_default -e GRID_URL=http://selenium-hub:4444 -v $(pwd):/app -w /app selenium-docker-jenkins:test-runner sh -c "echo \"Container /app directory contents:\" && ls -la /app && echo \"Checking for pom.xml:\" && ls -la /app/pom.xml || echo \"pom.xml not found in /app\" && mvn -B test"'
+          sh '''
+            docker run --rm --network selenium-docker-jenkins-1_default \
+              -e GRID_URL=http://selenium-hub:4444 \
+              -v $(pwd):/app \
+              -w /app \
+              selenium-docker-jenkins:test-runner \
+              sh -c "
+                echo 'Container /app directory contents:'
+                ls -la /app
+                echo 'Checking for pom.xml:'
+                ls -la /app/pom.xml || echo 'pom.xml not found in /app'
+                echo 'Running Maven test...'
+                mvn -B test
+              "
+          '''
         }
       }
       post {
