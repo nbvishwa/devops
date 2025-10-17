@@ -6,37 +6,49 @@ pipeline {
   }
 
   options {
-    // skipDefaultCheckout()
+    skipDefaultCheckout()
     timestamps()
   }
 
   stages {
+    stage('Checkout') {
+      steps {
+        checkout scm
+        sh 'pwd && ls -la'
+      }
+    }
 
     stage('Build test-runner image') {
       steps {
-        sh 'pwd && ls -la'
-        sh 'docker build -t selenium-docker-jenkins:test-runner ${WORKSPACE}'
+        dir('selenium-docker-jenkins-1') {
+          sh 'pwd && ls -la'
+          sh 'docker build -t selenium-docker-jenkins:test-runner .'
+        }
       }
     }
 
     stage('Start Selenium Grid') {
       steps {
-        sh 'docker compose -f ${DOCKER_COMPOSE_FILE} up -d selenium-hub chrome firefox edge'
-        // wait for hub to be ready
-        sh 'echo "Waiting for Selenium Hub..." && sleep 8'
+        dir('selenium-docker-jenkins-1') {
+          sh 'docker compose -f ${DOCKER_COMPOSE_FILE} up -d selenium-hub chrome firefox edge'
+          // wait for hub to be ready
+          sh 'echo "Waiting for Selenium Hub..." && sleep 8'
+        }
       }
     }
 
     stage('Run Tests') {
       steps {
-        // Run tests inside ephemeral container with network access to hub and nodes
-        sh 'docker run --rm --network selenium-docker-jenkins-1_default -e GRID_URL=http://selenium-hub:4444 -v ${WORKSPACE}:/app -w /app selenium-docker-jenkins:test-runner mvn -B test'
+        dir('selenium-docker-jenkins-1') {
+          // Run tests inside ephemeral container with network access to hub and nodes
+          sh 'docker run --rm --network selenium-docker-jenkins-1_default -e GRID_URL=http://selenium-hub:4444 -v ${WORKSPACE}/selenium-docker-jenkins-1:/app -w /app selenium-docker-jenkins:test-runner mvn -B test'
+        }
       }
       post {
         always {
-          junit allowEmptyResults: true, testResults: 'target/surefire-reports/junitreports/*.xml'
-          publishHTML(target: [allowMissing: true, alwaysLinkToLastBuild: true, keepAll: true, reportDir: 'target/surefire-reports', reportFiles: 'emailable-report.html', reportName: 'TestNG Report'])
-          archiveArtifacts artifacts: 'target/surefire-reports/**/*', allowEmptyArchive: true
+          junit allowEmptyResults: true, testResults: 'selenium-docker-jenkins-1/target/surefire-reports/junitreports/*.xml'
+          publishHTML(target: [allowMissing: true, alwaysLinkToLastBuild: true, keepAll: true, reportDir: 'selenium-docker-jenkins-1/target/surefire-reports', reportFiles: 'emailable-report.html', reportName: 'TestNG Report'])
+          archiveArtifacts artifacts: 'selenium-docker-jenkins-1/target/surefire-reports/**/*', allowEmptyArchive: true
         }
       }
     }
