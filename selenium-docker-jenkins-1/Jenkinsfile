@@ -6,7 +6,7 @@ pipeline {
   }
 
   options {
-    skipDefaultCheckout()
+    // skipDefaultCheckout()
     timestamps()
   }
 
@@ -14,7 +14,8 @@ pipeline {
 
     stage('Build test-runner image') {
       steps {
-        sh 'docker build -t selenium-docker-jenkins:test-runner .'
+        sh 'pwd && ls -la'
+        sh 'docker build -t selenium-docker-jenkins:test-runner ${WORKSPACE}'
       }
     }
 
