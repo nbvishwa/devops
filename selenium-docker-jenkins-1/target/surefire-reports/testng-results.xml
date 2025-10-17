@@ -2,12 +2,12 @@
 <testng-results ignored="0" total="3" passed="3" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2025-10-17T03:09:32 UTC" name="AmazonGridSuite" finished-at="2025-10-17T03:09:56 UTC" duration-ms="24185">
+  <suite started-at="2025-10-17T03:13:33 UTC" name="AmazonGridSuite" finished-at="2025-10-17T03:13:54 UTC" duration-ms="20959">
     <groups>
     </groups>
-    <test started-at="2025-10-17T03:09:32 UTC" name="AmazonGridTest" finished-at="2025-10-17T03:09:56 UTC" duration-ms="24185">
+    <test started-at="2025-10-17T03:13:33 UTC" name="AmazonGridTest" finished-at="2025-10-17T03:13:54 UTC" duration-ms="20959">
       <class name="com.example.tests.AmazonGridTest">
-        <test-method signature="openAmazonAndPrintTitle(java.lang.String)[pri:0, instance:com.example.tests.AmazonGridTest@124c278f]" started-at="2025-10-17T03:09:32 UTC" name="openAmazonAndPrintTitle" data-provider="browsers" finished-at="2025-10-17T03:09:39 UTC" duration-ms="7521" status="PASS">
+        <test-method signature="openAmazonAndPrintTitle(java.lang.String)[pri:0, instance:com.example.tests.AmazonGridTest@124c278f]" started-at="2025-10-17T03:13:33 UTC" name="openAmazonAndPrintTitle" data-provider="browsers" finished-at="2025-10-17T03:13:39 UTC" duration-ms="6664" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -18,7 +18,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- openAmazonAndPrintTitle -->
-        <test-method signature="openAmazonAndPrintTitle(java.lang.String)[pri:0, instance:com.example.tests.AmazonGridTest@124c278f]" started-at="2025-10-17T03:09:39 UTC" name="openAmazonAndPrintTitle" data-provider="browsers" finished-at="2025-10-17T03:09:48 UTC" duration-ms="8628" status="PASS">
+        <test-method signature="openAmazonAndPrintTitle(java.lang.String)[pri:0, instance:com.example.tests.AmazonGridTest@124c278f]" started-at="2025-10-17T03:13:39 UTC" name="openAmazonAndPrintTitle" data-provider="browsers" finished-at="2025-10-17T03:13:47 UTC" duration-ms="7207" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -29,7 +29,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- openAmazonAndPrintTitle -->
-        <test-method signature="openAmazonAndPrintTitle(java.lang.String)[pri:0, instance:com.example.tests.AmazonGridTest@124c278f]" started-at="2025-10-17T03:09:48 UTC" name="openAmazonAndPrintTitle" data-provider="browsers" finished-at="2025-10-17T03:09:56 UTC" duration-ms="8016" status="PASS">
+        <test-method signature="openAmazonAndPrintTitle(java.lang.String)[pri:0, instance:com.example.tests.AmazonGridTest@124c278f]" started-at="2025-10-17T03:13:47 UTC" name="openAmazonAndPrintTitle" data-provider="browsers" finished-at="2025-10-17T03:13:54 UTC" duration-ms="7071" status="PASS">
           <params>
             <param index="0">
               <value>

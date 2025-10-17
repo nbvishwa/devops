@@ -41,7 +41,7 @@ pipeline {
       steps {
         dir('selenium-docker-jenkins-1') {
           // Run tests inside ephemeral container with network access to hub and nodes
-          sh 'docker run --rm --network selenium-docker-jenkins-1_default -e GRID_URL=http://selenium-hub:4444 -v ${WORKSPACE}/selenium-docker-jenkins-1:/app -w /app selenium-docker-jenkins:test-runner mvn -B test'
+          sh 'docker run --rm --network selenium-docker-jenkins-1_default -e GRID_URL=http://selenium-hub:4444 -v $(pwd):/app -w /app selenium-docker-jenkins:test-runner mvn -B test'
         }
       }
       post {
