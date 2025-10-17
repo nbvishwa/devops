@@ -40,18 +40,12 @@ pipeline {
     stage('Run Tests') {
       steps {
         dir('selenium-docker-jenkins-1') {
-          // Debug: Show current directory and contents
-          sh 'echo "Current directory: $(pwd)"'
-          sh 'echo "Contents of current directory:"'
-          sh 'ls -la'
-          sh 'echo "Checking if pom.xml exists:"'
-          sh 'ls -la pom.xml || echo "pom.xml not found"'
-          
           // Run tests inside ephemeral container with network access to hub and nodes
+          // Use /workspace path since Jenkins container has the project mounted there
           sh '''
             docker run --rm --network selenium-docker-jenkins-1_default \
               -e GRID_URL=http://selenium-hub:4444 \
-              -v $(pwd):/app \
+              -v /workspace/selenium-docker-jenkins-1:/app \
               -w /app \
               selenium-docker-jenkins:test-runner \
               sh -c "
